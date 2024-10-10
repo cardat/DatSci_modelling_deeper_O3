@@ -6,9 +6,9 @@ load_packages <- function(pkg = c("SuperLearner",
                                      "xgboost",
                                      "CAST",
                                      "data.table",
-                                     "mgcv",
                                      "raster",
-                                     "glmnet"),
+                                     "glmnet",
+                                     "knitr"),
                             do_it = T, force_install = F){
 
   if(do_it){

@@ -8,6 +8,8 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+source("R/load_packages.R")
+load_packages(force_install=F)
 ```
 
 This report summarises our R environment, OS, CPU, and memory for reproducibility. This report will capture the key details for anyone wishing to replicate our computational setup.
@@ -48,11 +50,9 @@ Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) rstudio/2
 
 ## R Environment
 
-The session information, including R version, platform, and loaded packages.
-
-```{r session-info-detailed}
-# sessioninfo provides more detailed session information
-sessioninfo::session_info()
+The session information for R 
+```{r session-info}
+sessionInfo()
 ```
 
 
