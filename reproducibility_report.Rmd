@@ -2,7 +2,7 @@
 title: "Reproducibility Report: System and R Environment Summary"
 author: "Ivan Hanigan"
 date: "2024-10-10"
-output: html_document
+output: pdf_document
 ---
 
 

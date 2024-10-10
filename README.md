@@ -17,7 +17,7 @@ Data inputs are available on request and with authorised agreements.
 
 ## Requirements
 
-A complete list of required computation setup can be found in the `reproducibility_report.htm`
+A complete list of required computation setup can be found in the `reproducibility_report.pdf`
 
 
 ## License
