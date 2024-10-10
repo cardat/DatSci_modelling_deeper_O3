@@ -2,7 +2,7 @@
 
 This repository contains the code for supporting the deep ensemble machine learning component of the paper titled **"Deep ensemble machine learning with Bayesian blending improved accuracy and precision of modeled ground-level ozone for region with sparse monitoring."**
 
-The Bayesian blending component of the project can be found at [https://github.com/cardat/DatSci_modelling_BME_O3](https://github.com/cardat/DatSci_modelling_BME_O3)
+The Bayesian blending component of the project can be found at [https://github.com/cardat/DatSci_modelling_BME_O3](https://github.com/cardat/DatSci_modelling_deeper_with_BME_O3)
 
 ## Overview
 
