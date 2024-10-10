@@ -40,7 +40,7 @@ system("free -h", intern = TRUE)
 
 Note that the Rstudio editor version gave errors and so the Emacs ESS editor was used instead.
 
-The Rstudio Editor was 
+The Rstudio Editor version that failed was 
 
 ```
 RStudio 2023.06.1+524 "Mountain Hydrangea" Release (547dcf861cac0253a8abb52c135e44e02ba407a1, 2023-07-05) for Ubuntu Focal
