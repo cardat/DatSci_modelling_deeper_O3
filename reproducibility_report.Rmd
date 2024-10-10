@@ -1,0 +1,62 @@
+---
+title: "Reproducibility Report: System and R Environment Summary"
+author: "Ivan Hanigan"
+date: "2024-10-10"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This report summarises our R environment, OS, CPU, and memory for reproducibility. This report will capture the key details for anyone wishing to replicate our computational setup.
+
+## System Information
+
+### Operating System (OS) Info
+
+This section retrieves the operating system and system kernel details.
+
+```{r os-info}
+Sys.info()
+```
+
+### CPU and Memory Information (Linux/macOS)
+
+Below is the CPU and memory information retrieved from system commands.
+
+```{r system-info}
+# CPU Info
+system("lscpu", intern = TRUE)
+
+# Memory Info
+system("free -h", intern = TRUE)
+```
+
+## Note about code editor
+
+Note that the Rstudio editor version gave errors and so the Emacs ESS editor was used instead.
+
+The Rstudio Editor was 
+
+```
+RStudio 2023.06.1+524 "Mountain Hydrangea" Release (547dcf861cac0253a8abb52c135e44e02ba407a1, 2023-07-05) for Ubuntu Focal
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) rstudio/2023.06.1+524 Chrome/110.0.5481.208 Electron/23.3.0 Safari/537.36
+```
+
+
+## R Environment
+
+The session information, including R version, platform, and loaded packages.
+
+```{r session-info-detailed}
+# sessioninfo provides more detailed session information
+sessioninfo::session_info()
+```
+
+
+## Summary
+
+This report provides a complete summary of the system and R environment to aid in reproducibility of analyses. This document along with our code and data ensure that others can replicate our results under a similar computational setup.
+

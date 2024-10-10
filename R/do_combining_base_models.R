@@ -9,22 +9,18 @@ colnames(XGboost_nonspatialCV_final$Z) <- XGboost_nonspatialCV_final$libraryName
 
 # create stack training dataset
 trainset_stack_4Base <- cbind(RF_nonspatial_CV$Z, gbm_nonspatialCV_final$Z, XGboost_nonspatialCV_final$Z)
-## NB we excluded spacetime from DEEPER 
-# , train_pred_spacetime_o3$pred_spacetime)
+
 trainset_stack_4Base <- as.data.frame(trainset_stack_4Base)
-names(trainset_stack_4Base) <- c("RF","GBM","XGBoost") #,"spacetime")
+names(trainset_stack_4Base) <- c("RF","GBM","XGBoost") 
 
 # create stack testing dataset
 ## keep the variable names in stack test the same as the stack training data set
 testset_stack_4Base <- as.data.frame(cbind(RF_nonspatial_CV_pred$pred, gbm_nonspatialCV_final_pred$pred, XGboost_nonspatialCV_final_pred$pred))
-## we exclude spacetime from DEEPER 
-#  ,test_pred_spacetime_o3$pred_spacetime))
-names(testset_stack_4Base) <- c("RF","GBM","XGBoost")#,"spacetime")
+names(testset_stack_4Base) <- c("RF","GBM","XGBoost")
 
-do_plot <- F
+
 if(do_plot){
 ## box plot and violins
-library(vioplot)
 head(trainset_stack_4Base)
 toplot <- rbind(
   data.frame(model = "3.RF", estimate = trainset_stack_4Base$RF),
@@ -33,13 +29,18 @@ toplot <- rbind(
   )
 
 #par(mfrow = c(2,1))
-png("figures_and_tables/fig_baselearners_boxplots_20230924.png", res= 100, height = 550, width = 1000)
+png(sprintf("figures_and_tables/fig_baselearners_boxplots_%s.png",run_label), res= 100, height = 550, width = 1000)
 with(toplot, boxplot(estimate ~ model, ylab = "Estimated ozone (ppb)", xlab = "Model", names = c("GBM", "XGBoost", "RF")))
 dev.off()
 
-# Draw the plot
-with(toplot , vioplot( 
-  estimate[model=="GBM"] , estimate[model=="RF"], estimate[model=="XGBoost"],  
-  col=rgb(0.1,0.4,0.7,0.7) , names=c("GBM","RF","XGBoost") 
-))
+## scatter
+png(sprintf("figures_and_tables/fig_baselearners_scatter_%s.png",run_label), res= 100, height = 550, width = 1000)
+# pairs(trainset_stack_4Base)
+par(mfrow=c(1,3), cex = 1.1)
+with(trainset_stack_4Base, smoothScatter(x=XGBoost, y=GBM, xlab = "XGBoost ozone (ppb)", ylab = "GBM ozone (ppb)", xlim = c(10,55), ylim = c(10,55)))#, pch = 16, cex = 0.7))
+with(trainset_stack_4Base, smoothScatter(x=RF, y=GBM, xlab = "RF ozone (ppb)", ylab = "GBM ozone (ppb)", xlim = c(10,55), ylim = c(10,55)))#, pch = 16, cex = 0.7))
+with(trainset_stack_4Base, smoothScatter(x=RF, y=XGBoost, xlab = "RF ozone (ppb)", ylab = "XGBoost ozone (ppb)", xlim = c(10,55), ylim = c(10,55)))#, pch = 16, cex = 0.7))
+dev.off()
+
+
 }

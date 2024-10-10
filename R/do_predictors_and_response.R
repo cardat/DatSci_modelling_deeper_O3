@@ -1,4 +1,4 @@
-#do_predictors_and_responce <- function(data_from_Nico){
+#do_predictors_and_response <- function(data_from_CARDAT){
 
 #set the predictor monthly "o3" and dependence variables
 colnames(train_o3_ppb_1hr_max)[c(1,10,11)]
