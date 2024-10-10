@@ -43,5 +43,5 @@ Using 10 fold cross-validation (V = 10) we assessed 64 different configurations 
   save(XGboost_nonspatialCV_final,XGboost_nonspatialCV_final_pred,
        file = "base_models/XGBoost_model_pred.Rdata")
   # or 
-  #load(file = file.path(outdir_results, "XGBoost_model_pred.Rdata"))
+  #load(file = file.path("base_models", "XGBoost_model_pred.Rdata"))
  

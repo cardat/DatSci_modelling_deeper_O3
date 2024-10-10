@@ -32,4 +32,4 @@ RF_nonspatial_CV_pred <- SuperLearner::predict.SuperLearner(object = RF_nonspati
 save(RF_nonspatial_CV, RF_nonspatial_CV_pred,
      file = "base_models/RF_model_pred.Rdata")
 # or IF DE-BUGGING
-# load(file = file.path(outdir_results, "RF_model_pred.Rdata"))
+# load(file = file.path("base_models", "RF_model_pred.Rdata"))

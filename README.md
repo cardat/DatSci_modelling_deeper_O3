@@ -1,6 +1,8 @@
-# Deep Ensemble Machine Learning for Ground-Level Ozone Prediction
+# Deep Ensemble Machine Learning with Bayesian blending for Ground-Level Ozone Prediction
 
-This repository contains the code and scripts supporting the paper titled **"Deep ensemble machine learning with Bayesian blending improved accuracy and precision of modeled ground-level ozone for region with sparse monitoring."**
+This repository contains the code for supporting the deep ensemble machine learning component of the paper titled **"Deep ensemble machine learning with Bayesian blending improved accuracy and precision of modeled ground-level ozone for region with sparse monitoring."**
+
+The Bayesian blending component of the project can be found at [https://github.com/cardat/DatSci_modelling_BME_O3](https://github.com/cardat/DatSci_modelling_BME_O3)
 
 ## Overview
 
@@ -20,7 +22,7 @@ A complete list of required computation setup can be found in the `reproducibili
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. 
 
 ---
 
