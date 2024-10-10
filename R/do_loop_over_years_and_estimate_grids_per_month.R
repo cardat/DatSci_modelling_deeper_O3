@@ -1,7 +1,7 @@
 #do_loop_over_years_and_estimate_grids_per_month <- function(combining_base_models, deeper_model_with_meta_models, get_grids_of_predictor_values){
   # loop over years and estimate grids per month
   strt <- Sys.time()
-  for(yy in 2005:2016){
+  for(yy in 2005:2018){
     #  yy = 2005
     
     predict_gridcell <- merge(gr2_0[year %in% yy & month %in% 1:12],
