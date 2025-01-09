@@ -26,7 +26,7 @@ Using 10 fold cross-validation (V = 10) we assessed 64 different configurations 
                                             
                                             X = train_o3_ppb_1hr_max_caret[,predictor],
                                             
-                                            cvControl = list(V = 10),
+                                            cvControl = cv_control,
                                             
                                             SL.library = c(learners_xgboost$names)) 
   

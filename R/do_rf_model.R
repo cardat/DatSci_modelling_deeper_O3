@@ -10,12 +10,12 @@ learners_rf = create.Learner("SL.ranger", tune = list(mtry = 150, min.node.size 
 
 start <- Sys.time()
 ## random forest model
-# changed cvControl = list(validRows = validRows_o3_ppb_1hr_max),
+
 RF_nonspatial_CV <- SuperLearner(Y = train_o3_ppb_1hr_max_caret[,dependence],
                               
                               X = train_o3_ppb_1hr_max_caret[,predictor],
                               
-                              cvControl = list(V = 10), 
+                              cvControl = cv_control,
                               
                               SL.library = c(learners_rf$names)) 
 

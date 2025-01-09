@@ -12,7 +12,7 @@ meta_nonspatialCV_final_external = CV.SuperLearner(
   X = trainset_stack_4Base,
   family = gaussian(),
   method = "method.NNLS",
-  cvControl = list(V = 10),
+  cvControl = cv_control,
   parallel = "seq", # "multicore", #THIS DID NOT WORK
   SL.library = c("SL.ranger","SL.xgboost","SL.mean","SL.glmnet"))
 end <- Sys.time()

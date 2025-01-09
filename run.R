@@ -1,4 +1,8 @@
 #### Aim: DEEP learning ozone model ####
+run_label <- "20250110"
+## the test run with general-CV at first submission to ENVSOFT was
+## "20241010"
+
 ## when testing the codes it is useful to run these sub-modules interactively to de-bug and troubleshoot
 do_base_models <- F
 do_meta_models <- F
@@ -12,8 +16,16 @@ config <-source("config.R")
 # NOTE THAT THE INPUT DATA FROM CARDATA ARE AVAILABLE BY REQUEST ONLY
 source("R/do_data_from_CARDAT.R")
 
+# select if using spatial-CV or general-CV
+cv_type <- "spatial-CV" # "general-CV"
+
+if(cv_type == "spatial-CV"){
+  cv_control <- list(validRows = validRows_o3_ppb_1hr_max)
+} else {
+  cv_control <- list(V = 10)
+}
+
 source("R/do_predictors_and_response.R")
- 
 
 #### do_base_models ####
 if(do_base_models){

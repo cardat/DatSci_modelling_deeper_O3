@@ -27,7 +27,7 @@
     Y = train_o3_ppb_1hr_max_caret[,dependence],
     X = trainset_stack_4Base,
     method = "method.NNLS",
-    cvControl = list(V = 10),
+    cvControl = cv_control,
     SL.library = c("SL.ranger","SL.xgboost","SL.mean","SL.glmnet"))
 
   end <- Sys.time()

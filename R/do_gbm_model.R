@@ -5,10 +5,10 @@ We tuned the GBM model by keeping n.minobsinnode constant at 20 and varying shri
 '
   
   tab_hparams <- rbind(tab_hparams, 
-                       data.frame(Model = "GBM", Hyperparameters = "shrinkage = 0.1, n.trees = 200,interaction.depth = 3, n.minobsinnode = 20")
+                       data.frame(Model = "GBM", Hyperparameters = "shrinkage = 0.1, gbm.trees = c(200), interaction.depth = 3, n.minobsinnode = 20")
   )
   
-  learners_gbm = create.Learner("SL.gbm", tune = list(shrinkage = c(.1), n.trees = c(200),interaction.depth = c(3),n.minobsinnode = 20))
+  learners_gbm = create.Learner("SL.gbm", tune = list(shrinkage = c(.1), gbm.trees = c(200), interaction.depth = c(3),n.minobsinnode = 20))
   
   start <- Sys.time()
   ## GBM model
@@ -16,7 +16,7 @@ We tuned the GBM model by keeping n.minobsinnode constant at 20 and varying shri
                                       
                                       X = train_o3_ppb_1hr_max_caret[,predictor],
                                       
-                                      cvControl = list(V = 10),
+                                      cvControl = cv_control,
                                       
                                       SL.library = c(learners_gbm$names)) 
   
