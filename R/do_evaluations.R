@@ -227,6 +227,9 @@ saveHTML(
     setDT(analyte)
     stn_list2 <- analyte[!is.na(o3_test) & state == "NSW",.N,by=.(gid)]
     stn_list2 <- stn_list2[rev(order(N))]$gid
+
+    yr_max_todo <- 2018
+
     for(j in 1:2){plot(1,1, type = "n", axes=F)}
     for(j in 1:4){#length(unique(analyte$gid))){#nrow(stn_list2)){
       # j = 1
@@ -240,7 +243,7 @@ saveHTML(
                 main=stn_list2[stn_i2],
                 ylab="o3", ylim=c(0,60),
                 xlim = c(as.Date(paste(2005,1,1,sep="-")),
-                         as.Date(paste(2006,12,31,sep="-")))
+                         as.Date(paste(yr_max_todo,12,31,sep="-")))
                 
            )
       )
@@ -292,7 +295,7 @@ saveHTML(
                 main=stn_list2[stn_i2],
                 ylab="o3", ylim=c(0,60),
                 xlim = c(as.Date(paste(2005,1,1,sep="-")),
-                         as.Date(paste(2006,12,31,sep="-")))
+                         as.Date(paste(yr_max_todo,12,31,sep="-")))
                 
            )
       )
