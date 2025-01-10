@@ -63,7 +63,7 @@ source("R/do_collecting_the_R2_results_for_report.R")
 knitr::kable(tab_results_base, digits = 2)
 tab_results_base <- tab_results_base[rev(order(tab_results_base$R2_nonspatial_cv)),]
 row.names(tab_results_base) <- NULL
-knitr::kable(tab_results_base, digits = 1, row.names = F)
+knitr::kable(tab_results_base, digits = c(2,1,2,1), row.names = F)
 #### store the evaluation of base learners results ####
 saveRDS(tab_results_base, file = "figures_and_tables/tab_results_base.rds")
 
@@ -72,7 +72,7 @@ write.csv(tab_results_base, file = "figures_and_tables/tab_results_base.csv")
 ## the weights of meta models(with a total of 1)
 meta_nonspatialCV_final$coef
 # don't show test in training set
-knitr::kable(tab_results_meta[,1:6], digits = c(NA,1,1,1,1,1))
+knitr::kable(tab_results_meta[,1:6], digits = c(NA,1,2,1,2,1))
 write.csv(tab_results_meta[,1:6], file = "figures_and_tables/tab_results_meta.csv")
 
 do_predict_grids <- F
