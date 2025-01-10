@@ -72,7 +72,7 @@ write.csv(tab_results_base, file = "figures_and_tables/tab_results_base.csv")
 ## the weights of meta models(with a total of 1)
 meta_nonspatialCV_final$coef
 # don't show test in training set
-knitr::kable(tab_results_meta[c(1:3,5),1:6], digits = c(NA,1,2,1,2,1))
+knitr::kable(tab_results_meta[c(1:3,5),1:6], digits = c(NA,2,2,1,2,1))
 write.csv(tab_results_meta[c(1:3,5),1:6], file = "figures_and_tables/tab_results_meta.csv")
 
 do_predict_grids <- F
