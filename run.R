@@ -1,5 +1,5 @@
 #### Aim: DEEP learning ozone model ####
-run_label <- "20250110"
+run_label <- "20250110a"
 ## the test run with general-CV at first submission to ENVSOFT was
 ## "20241010"
 
@@ -51,7 +51,7 @@ source("R/do_combining_base_models.R")
 source("R/do_deeper_model_with_meta_models.R")
 
 do_plot_meta <- F
-source("R/do_external_nonspatial_10_fold_CV_with_deeper.R")
+source("R/do_external_10_fold_CV_with_deeper.R")
 
 }
 
