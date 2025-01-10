@@ -364,4 +364,4 @@ caret::RMSE(pred=analyte$e, obs = analyte$o3_train, na.rm = T)
 analyte$pred_deeper <- analyte$e
 analyte$e <- NULL
 head(analyte)
-write.csv(analyte, paste0("results_",run_label,"/results_deeper_",run_label,".csv"), row.names = F)
+write.csv(analyte, paste0("results_",run_label,"_animation/results_deeper_",run_label,".csv"), row.names = F)
