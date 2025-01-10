@@ -8,7 +8,9 @@ load_packages <- function(pkg = c("SuperLearner",
                                      "data.table",
                                      "raster",
                                      "glmnet",
-                                     "knitr"),
+                                  "knitr",
+                                  "animation",
+                                  "fields"),
                             do_it = T, force_install = F){
 
   if(do_it){

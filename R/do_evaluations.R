@@ -2,22 +2,22 @@
 
 #### functions ####
 library(raster)
-library(rgdal)
-library(mgcv)
-library(fields)
-library(maptools)
-library(oz)
+#library(rgdal)
+#library(mgcv)
+#library(fields)
+#library(maptools)
+#library(oz)
 library(data.table)
 library(animation)
 ani.options('autobrowse' = FALSE, verbose = FALSE)
 
 
 #### load ####
-cloudstor_dir <- "c:/Users/ivan_hanigan/cloudstor/Shared/ResearchProjects_CAR"
-datadir <- file.path(cloudstor_dir,"Air_pollution_modelling_APMMA/modelling_general/")
+#cloudstor_dir <- "c:/Users/ivan_hanigan/cloudstor/Shared/ResearchProjects_CAR"
+#datadir <- file.path(cloudstor_dir,"Air_pollution_modelling_APMMA/modelling_general/")
 
-setwd(paste0(cloudstor_dir))
-load(paste0(datadir, '/data_o3_ppb_1hr_max.RData'))
+#setwd(paste0(cloudstor_dir))
+load(file.path(datadir, '/data_o3_ppb_1hr_max.RData'))
 #### predictors and responce ####
 #set the predictor monthly "o3" and dependence variables
 predictor <- colnames(train_o3_ppb_1hr_max)[-c(1,10,11)]
@@ -34,7 +34,10 @@ names(test_o3_ppb_1hr_max)
 
 
 # dir(datadir)
-dt_v1 <- fread(file.path("Air_pollution_modelling_APMMA/GIS_predictors_from_CARDAT/data_derived_for_modelling", "apmma_mly_o3_no2_data_2005_2018_V20210527_no_missing_spatiotemporal_for_modelling.csv"))
+dt_v1 <- fread(file.path(dirname(datadir),
+                         "GIS_predictors_from_CARDAT/data_derived_for_modelling",
+                         "apmma_mly_o3_no2_data_2005_2018_V20210527_no_missing_spatiotemporal_for_modelling.csv")
+               )
 # dim(dt_v1)
 
 
@@ -78,15 +81,18 @@ train_df$o3_train <- train_df$o3_ppb_1hr_max
 analyte <- merge(analyte, train_df, all.x = T, by = c("gid", "year", "month", "o3_ppb_1hr_max"))
 head(analyte)
 analyte0 <- analyte
+dir()
 
-dir("Air_pollution_modelling_APMMA/modelling_DEEPER/o3_monthly")
-dir("Air_pollution_modelling_APMMA/modelling_DEEPER/o3_monthly/results_o3_20211008")
+dir(paste0("results_", run_label))
 # old prior alven scatter results_o3_20211004")
 # old with raw results_o3_20210927
 # OLD with constrained results_o3_20210915")
 #### deeper anim ####
 
-indir_deep <- "Air_pollution_modelling_APMMA/modelling_DEEPER/o3_monthly/results_o3_20211004"
+indir_deep <- paste0("results_", run_label)
+
+
+  #"Air_pollution_modelling_APMMA/modelling_DEEPER/o3_monthly/results_o3_20211004"
 # old with raw results_o3_20210927
 # OLD with constrained results_o3_20210915"
 dir(indir_deep)
@@ -94,11 +100,12 @@ timestodo <- dir(indir_deep, recursive = T, full.names = T, pattern = ".tif$")
 timestodo <- timestodo[grep("deeper", timestodo)]
 basename(timestodo)
 
-outdir <- file.path(dirname(indir_deep), "results_o3_20211008_animation")
+outdir <- paste0("results_",run_label,"_animation")
 # old "results_o3_20211004_animation")
 # old raw results_o3_20210927_animation
 # OLD constrained "results_o3_20210915_animation")
 dir.create(outdir)
+projdir <- getwd()
 setwd(outdir)
 #### get predictions ####
 
@@ -111,7 +118,7 @@ for(i in 1:length(timestodo)){
           1, sep = "-")
   )
   
-  r <- raster(file.path("../../../..", timestodo[i]))
+  r <- raster(file.path("../", timestodo[i]))
   #t_todo <- gsub("o3_","",gsub(".tif","", basename(timestodo[i])))
   t_todo <- idx #as.Date(paste(strsplit(t_todo, "_")[[1]][1],strsplit(t_todo, "_")[[1]][2],1,sep="-")) 
   
@@ -145,9 +152,10 @@ analyte$idx <- NULL
 head(analyte)
 
 caret::R2(pred = analyte$e, obs = analyte$o3_test, na.rm=T)
-# 0.8163255
+caret::RMSE(pred = analyte$e, obs = analyte$o3_test, na.rm=T)
+
 caret::R2(pred = analyte$e, obs = analyte$o3_train, na.rm=T)
-# 0.8788418
+caret::RMSE(pred = analyte$e, obs = analyte$o3_train, na.rm=T)
 
 #### do ani loop spt ####
 #saveGIF(
@@ -174,10 +182,10 @@ saveHTML(
             gsub(".tif","",strsplit(basename(timestodo[i]), "_")[[1]][5]),
             1, sep = "-")
     )
-    #  print(idx)
+    print(idx)
     
     
-    r <- raster(file.path("../../../..",timestodo[i]))
+    r <- raster(file.path("../",timestodo[i]))
     
     #writeRaster(r, "o3_2005_qc.tif", overwrite = T)
     # 
@@ -332,24 +340,28 @@ saveHTML(
   }      
   , interval = 1, outdir = getwd(),movie.name = "spacetimegam_movie.html", ani.dev = function(...){png(res=75*1.1,...)}, ani.width = 1000, ani.height = 500
 )	
+
 getwd()
+setwd(projdir)
+
 names(analyte)
 head(analyte[analyte$gid == "st_marys_NSW", c("gid", "date_i", "o3_ppb_1hr_max", "o3_train", "o3_test", "e")],48)
 head(analyte[analyte$gid == "civic_ACT", c("gid", "date_i", "o3_ppb_1hr_max", "o3_train", "o3_test", "e")],48)
 
-?caret::R2
+#?caret::R2
 caret::R2(pred=analyte$e, obs = analyte$o3_test, na.rm = T)
-# 0.8163255
+
 summary(lm(o3_test ~ e, data = analyte))
+
 caret::RMSE(pred=analyte$e, obs = analyte$o3_test, na.rm = T)
-# 3.187914
+
 caret::R2(pred=analyte$e, obs = analyte$o3_train, na.rm = T)
-# 0.8788418
+
 caret::RMSE(pred=analyte$e, obs = analyte$o3_train, na.rm = T)
-# 2.364643
+
 
 # save output
 analyte$pred_deeper <- analyte$e
 analyte$e <- NULL
 head(analyte)
-write.csv(analyte, "results_deeper_20211008.csv", row.names = F)
+write.csv(analyte, paste0("results_",run_label,"/results_deeper_",run_label,".csv"), row.names = F)
