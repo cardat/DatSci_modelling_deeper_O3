@@ -1,5 +1,5 @@
 #### Aim: DEEP learning ozone model ####
-run_label <- "20250110a"
+run_label <- "20250110"
 ## the test run with general-CV at first submission to ENVSOFT was
 ## "20241010"
 
