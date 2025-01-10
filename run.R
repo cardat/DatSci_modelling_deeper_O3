@@ -81,3 +81,5 @@ if(do_predict_grids){
 
   source("R/do_loop_over_years_and_estimate_grids_per_month.R")
 }
+
+source("R/do_evaluations.R")
