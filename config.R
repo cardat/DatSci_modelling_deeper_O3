@@ -1,5 +1,6 @@
 # first set the path locations
 cloudstor_dir <- "~/onedrive/Shared/SURE_STANDARD_STAGING"
+# cloudstor_dir <- "C:/Users/287658c/OneDrive - Curtin/Shared/SURE_STANDARD_STAGING"
 datadir <- file.path(cloudstor_dir,"Air_pollution_modelling_APMMA/modelling_general/")
 
 # create a sub directory for storing the base model results
