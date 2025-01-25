@@ -62,11 +62,9 @@
     
     for(mm in c(1:12)){
       # mm = 1
-      for(model_todo in c("pred_deeper")){
+      for(model_todo in c("pred_deeper", "pred_gbm", "pred_xgboost", "pred_rf")){
         # model_todo = "pred_deeper"
-        # OPTIONAL  ,  "pred_gbm",       "pred_xgboost", "pred_rf",
-        
-        #  model_todo = "pred_deeper"
+
         spg <- predict_gridcell[predict_gridcell$year == yy &
                                predict_gridcell$month == mm &
                                predict_gridcell$state %in% c("ACT", "NSW"),
