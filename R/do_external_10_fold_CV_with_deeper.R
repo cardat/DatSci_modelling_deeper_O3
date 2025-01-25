@@ -48,7 +48,7 @@ if(do_plot_meta){
   
   #par(mfrow = c(2,1))
   png(sprintf("figures_and_tables/fig_metalearners_boxplots_%s.png", run_label), res= 100, height = 550, width = 1000)
-  with(toplot, boxplot(estimate ~ model, ylab = "Estimated ozone (ppb)", xlab = "Model", names = c("GLMNET", "RF", "XGBoost", "DEML final estimates")))
+  with(toplot, boxplot(estimate ~ model, ylab = "Estimated ozone (ppb)", xlab = "Model", names = c("GLMNET", "RF", "XGBoost", "DEML final estimates"), ylim = c(10,60)))
   dev.off()
   
   ## scatter

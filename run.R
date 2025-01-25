@@ -43,14 +43,26 @@ load("base_models/RF_model_pred.Rdata")
 load("base_models/XGBoost_model_pred.Rdata")
 load("base_models/GBM_model_pred.Rdata")
 
+do_variable_importance <- FALSE
+if(do_variable_importance){
+  # variable importance of best model base learner, in this case we know it was XGBoost
+  booster <- XGboost_nonspatialCV_final$fitLibrary[[1]]$object
+  booster <- xgb.Booster.complete(booster)
+  print(booster)
+  var_importance <- xgb.importance(model = booster)
+  var_importance_mu <- mean(var_importance$Gain)
+  rel_imp_top <- var_importance[var_importance$Gain >= var_importance_mu,]
+  write.csv(rel_imp_top, "base_models/XGBoost_model_relative_importance_top.csv", row.names = F)
+}
+
 #### do_meta_models ####
 if(do_meta_models){
-do_plot <- F
+do_plot <- T
 source("R/do_combining_base_models.R")
 
 source("R/do_deeper_model_with_meta_models.R")
 
-do_plot_meta <- F
+do_plot_meta <- T
 source("R/do_external_10_fold_CV_with_deeper.R")
 
 }

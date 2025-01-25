@@ -29,12 +29,12 @@ toplot <- rbind(
   )
 
 #par(mfrow = c(2,1))
-png(sprintf("figures_and_tables/fig_baselearners_boxplots_%s.png",run_label), res= 100, height = 550, width = 1000)
-with(toplot, boxplot(estimate ~ model, ylab = "Estimated ozone (ppb)", xlab = "Model", names = c("GBM", "XGBoost", "RF")))
+png(sprintf("figures_and_tables/fig_baselearners_boxplots_%s.png",run_label), res= 133, height = 550, width = 1000*1.25)
+with(toplot, boxplot(estimate ~ model, ylab = "Estimated ozone (ppb)", xlab = "Model", names = c("GBM", "XGBoost", "RF"), cex=1))
 dev.off()
 
 ## scatter
-png(sprintf("figures_and_tables/fig_baselearners_scatter_%s.png",run_label), res= 100, height = 550, width = 1000)
+png(sprintf("figures_and_tables/fig_baselearners_scatter_%s.png",run_label), res= 100, height = 400, width = 1000)
 # pairs(trainset_stack_4Base)
 par(mfrow=c(1,3), cex = 1.1)
 with(trainset_stack_4Base, smoothScatter(x=XGBoost, y=GBM, xlab = "XGBoost ozone (ppb)", ylab = "GBM ozone (ppb)", xlim = c(10,55), ylim = c(10,55)))#, pch = 16, cex = 0.7))
